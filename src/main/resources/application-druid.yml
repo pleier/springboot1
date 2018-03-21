@@ -18,16 +18,15 @@ spring:
       time-between-eviction-runs-millis: 60000
       # 配置一个连接在池中最小生存的时间，单位是毫秒
       min-evictable-idle-time-millis: 300000
-      validation-query: SELECT 1 FROMDUAL
+      validation-query: select 'x'
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
       # 打开PSCache，并且指定每个连接上PSCache的大小
-      pool-prepared-statements: true
-      max-pool-prepared-statement-per-connection-size: 20
-      #filters: stat,wall,log4j
-      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      #pool-prepared-statements: false
+      #max-pool-prepared-statement-per-connection-size: 20
       use-global-data-source-stat: true
+
       filter:
         stat:
           log-slow-sql: true
@@ -37,15 +36,19 @@ spring:
           config:
             multi-statement-allow: true
 
-  jpa:
-    database: mysql
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-    properties:
-       hibernate:
-           dialect: org.hibernate.dialect.MySQL5Dialect
+#  jpa:
+#    database: mysql
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+#    properties:
+#       hibernate:
+#           dialect: org.hibernate.dialect.MySQL5Dialect
 
   session:
     store-type: none
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
